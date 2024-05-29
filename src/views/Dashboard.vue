@@ -11,6 +11,10 @@ import RoomList from './RoomList.vue'
 		My Courses
 	</h3>
 
+	<div>
+		<router-link to="/courses/new">Add New Course</router-link>
+	</div>
+
 	<CourseList></CourseList>
 
 	<br>
