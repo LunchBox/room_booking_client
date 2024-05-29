@@ -1,3 +1,14 @@
+<script setup>
+import { useRouter } from 'vue-router';
+import { currentUser, signOut } from './user';
+
+const router = useRouter()
+function logout() {
+	signOut()
+	router.push("/")
+}
+</script>
+
 <template>
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container">
@@ -8,10 +19,10 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item">
+					<li class=" nav-item">
 						<a class="nav-link active" aria-current="page" href="#">Home</a>
 					</li>
-					<li class="nav-item">
+					<!-- <li class="nav-item">
 						<a class="nav-link" href="#">Link</a>
 					</li>
 					<li class="nav-item dropdown">
@@ -30,21 +41,27 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link disabled" aria-disabled="true">Disabled</a>
-					</li>
+					</li> -->
 				</ul>
 				<ul class="nav">
-					<li class="nav-item">
-						<router-link to="/sign_in" class="nav-link">Sign In</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/sign_up" class="nav-link">Sign Up</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/dashboard" class="nav-link">user1</router-link>
-					</li>
-					<li class="nav-item">
-						<a href="" class="nav-link">Sign Out</a>
-					</li>
+					<template v-if="currentUser">
+						<li class="nav-item">
+							<router-link to="/dashboard" class="nav-link">
+								{{ currentUser.name }}
+							</router-link>
+						</li>
+						<li class="nav-item">
+							<a href="" class="nav-link" @click.prevent="logout">Sign Out</a>
+						</li>
+					</template>
+					<template v-else>
+						<li class="nav-item">
+							<router-link to="/sign_in" class="nav-link">Sign In</router-link>
+						</li>
+						<li class="nav-item">
+							<router-link to="/sign_up" class="nav-link">Sign Up</router-link>
+						</li>
+					</template>
 				</ul>
 			</div>
 		</div>
