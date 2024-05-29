@@ -36,12 +36,12 @@ const router = createRouter({
     },
 
     {
-      path: "/courses/:id/edit",
+      path: "/courses/:slug/edit",
       name: "edit_course",
       component: () => import("../views/CourseEdit.vue"),
     },
     {
-      path: "/courses/:id",
+      path: "/courses/:slug",
       name: "course",
       component: () => import("../views/CourseDetail.vue"),
     },

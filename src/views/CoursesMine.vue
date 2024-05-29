@@ -2,9 +2,6 @@
 import { ref } from 'vue';
 import { currentUser } from '@/components/user';
 
-import CourseList from './CourseList.vue'
-import RoomList from './RoomList.vue'
-
 const courses = ref([])
 
 async function load() {
