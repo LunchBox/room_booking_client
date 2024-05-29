@@ -1,8 +1,9 @@
 <script setup>
+import Courses from './Courses.vue'
 </script>
 
 <template>
 	<main>
-		Main content
+		<Courses></Courses>
 	</main>
 </template>
