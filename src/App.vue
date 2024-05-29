@@ -11,6 +11,8 @@ import { RouterLink, RouterView } from 'vue-router'
 		<div class="user-nav">
 			<router-link to="/sign_in">Sign In</router-link>
 			<router-link to="/sign_up">Sign Up</router-link>
+			<router-link to="/dashboard">user1</router-link>
+			<a href="">Sign Out</a>
 		</div>
 	</header>
 

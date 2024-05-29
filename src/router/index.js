@@ -34,6 +34,21 @@ const router = createRouter({
       name: "course",
       component: () => import("../views/CourseDetail.vue"),
     },
+    {
+      path: "/dashboard",
+      name: "dashboard",
+      component: () => import("../views/Dashboard.vue"),
+    },
+    {
+      path: "/admin/rooms",
+      name: "rooms",
+      component: () => import("../views/Rooms.vue"),
+    },
+    {
+      path: "/admin/rooms/:id",
+      name: "rooms",
+      component: () => import("../views/RoomDetail.vue"),
+    },
   ],
 });
 
