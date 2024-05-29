@@ -1,23 +1,29 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+
+import Header from "./components/Header.vue"
 </script>
 
 <template>
-	<header>
-		<h1>
-			<router-link to="/">Room Booking</router-link>
-		</h1>
+	<Header>
+		<div class="container">
+			<h1>
+				<router-link to="/">Room Booking</router-link>
+			</h1>
 
-		<div class="user-nav">
-			<router-link to="/sign_in">Sign In</router-link>
-			<router-link to="/sign_up">Sign Up</router-link>
-			<router-link to="/dashboard">user1</router-link>
-			<a href="">Sign Out</a>
+			<div class="user-nav">
+				<router-link to="/sign_in">Sign In</router-link>
+				<router-link to="/sign_up">Sign Up</router-link>
+				<router-link to="/dashboard">user1</router-link>
+				<a href="">Sign Out</a>
+			</div>
 		</div>
-	</header>
+	</Header>
 
 	<main>
-		<RouterView />
+		<div class="container">
+			<RouterView />
+		</div>
 	</main>
 </template>
 

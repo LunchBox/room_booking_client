@@ -2,26 +2,18 @@
 	<h2>Edit Course</h2>
 
 	<form>
-		<div>
-			<label>
-				<span>Title</span>
-				<input type="text">
-			</label>
-			<label>
-				<span>Slug</span>
-				<input type="text">
-			</label>
-			<label>
-				<span>Description</span>
-				<textarea></textarea>
-			</label>
-			<label>
-				<span>Schedule</span>
-				...pending
-			</label>
-			<div>
-				<button>Submit</button>
-			</div>
+		<div class="mb-3">
+			<label for="exampleInputPassword1" class="form-label">Title</label>
+			<input type="text" class="form-control" id="exampleInputPassword1">
 		</div>
+		<div class="mb-3">
+			<label for="exampleInputPassword2" class="form-label">Slug</label>
+			<input type="text" class="form-control" id="exampleInputPassword1">
+		</div>
+		<div class="mb-3">
+			<label for="exampleInputPassword1" class="form-label">Description</label>
+			<textarea class="form-control" id="exampleInputPassword1"></textarea>
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 </template>

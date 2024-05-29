@@ -12,7 +12,7 @@ import RoomList from './RoomList.vue'
 	</h3>
 
 	<div>
-		<router-link to="/courses/new">Add New Course</router-link>
+		<router-link to="/courses/new" class="btn btn-light">Add New Course</router-link>
 	</div>
 
 	<CourseList></CourseList>
