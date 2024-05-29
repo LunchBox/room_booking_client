@@ -1,21 +1,17 @@
 <script setup>
+
 import CourseList from './CourseList.vue'
 import RoomList from './RoomList.vue'
+
+import CoursesMine from './CoursesMine.vue'
+
 </script>
 
 
 <template>
 	<h2>Dashboard: user1</h2>
 
-	<h3>
-		My Courses
-	</h3>
-
-	<div>
-		<router-link to="/courses/new" class="btn btn-light">Add New Course</router-link>
-	</div>
-
-	<CourseList></CourseList>
+	<CoursesMine></CoursesMine>
 
 	<br>
 	<hr>
