@@ -26,6 +26,28 @@ async function load() {
 }
 
 load()
+
+
+
+async function submit() {
+	const url = `http://172.18.17.2:7078/api/v1/courses/${course.value.id}/submit`
+
+	const res = await fetch(url, {
+		method: "PATCH",
+		headers: {
+			"Content-Type": "application/json",
+			// 'Content-Type': 'application/x-www-form-urlencoded',
+			"Authorization": `Bearer ${currentUser.value.token}`
+		}
+	})
+
+	const body = await res.json()
+	if (res.ok) {
+		load()
+	} else {
+		console.log(body)
+	}
+}
 </script>
 
 <template>
@@ -36,14 +58,16 @@ load()
 		</h2>
 
 		<div>
+			state: {{ course.state }}
+		</div>
+
+		<div>
 			{{ course.description }}
 		</div>
 
-		<div class="my-4">
+		<div class="my-4" v-if="course.state === 'draft'">
 			<router-link :to="`/courses/${course.slug}/edit`" class="btn btn-light">Edit</router-link>
-			<a href="#" @click.prevent="" class="btn btn-light">Submit for Reviewing</a>
+			<a href="#" @click.prevent="submit" class="btn btn-light">Submit for Reviewing</a>
 		</div>
-
-
 	</div>
 </template>
