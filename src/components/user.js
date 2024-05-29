@@ -1,4 +1,4 @@
-import { ref, computed } from "vue";
+import { ref } from "vue";
 
 const currentUser = ref(null);
 
@@ -6,7 +6,7 @@ if (localStorage.getItem("user")) {
   currentUser.value = JSON.parse(localStorage.getItem("user"));
 }
 
-function regUser(user) {
+function signIn(user) {
   localStorage.setItem("user", JSON.stringify(user));
   currentUser.value = user;
 }
@@ -16,4 +16,4 @@ function signOut() {
   currentUser.value = null;
 }
 
-export { currentUser, regUser, signOut };
+export { currentUser, signIn, signOut };

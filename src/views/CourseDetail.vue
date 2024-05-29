@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { currentUser } from '@/components/user';
+import { currentAdmin } from '@/components/admin';
 
 const route = useRoute()
 
@@ -12,10 +13,15 @@ async function load() {
 	loading.value = true
 	const url = `http://172.18.17.2:7078/api/v1/courses/${route.params.slug}`
 
+	const headers = {}
+	if (currentUser.value) {
+		headers["Authorization"] = `Bearer ${currentUser.value.token}`
+	} else if (currentAdmin.value) {
+		headers["Authorization"] = `Bearer ${currentAdmin.value.token}`
+	}
+
 	const res = await fetch(url, {
-		headers: {
-			"Authorization": `Bearer ${currentUser.value.token}`
-		}
+		headers
 	})
 
 	const body = await res.json()
@@ -48,6 +54,47 @@ async function submit() {
 		console.log(body)
 	}
 }
+
+async function approve() {
+	const url = `http://172.18.17.2:7078/api/v1/admin/courses/${course.value.id}/publish`
+
+	const res = await fetch(url, {
+		method: "PATCH",
+		headers: {
+			"Content-Type": "application/json",
+			// 'Content-Type': 'application/x-www-form-urlencoded',
+			"Authorization": `Bearer ${currentAdmin.value.token}`
+		}
+	})
+
+	const body = await res.json()
+	if (res.ok) {
+		load()
+	} else {
+		console.log(body)
+	}
+}
+
+async function revoke() {
+	const url = `http://172.18.17.2:7078/api/v1/admin/courses/${course.value.id}/revoke`
+
+	const res = await fetch(url, {
+		method: "PATCH",
+		headers: {
+			"Content-Type": "application/json",
+			// 'Content-Type': 'application/x-www-form-urlencoded',
+			"Authorization": `Bearer ${currentAdmin.value.token}`
+		}
+	})
+
+	const body = await res.json()
+	if (res.ok) {
+		load()
+	} else {
+		console.log(body)
+	}
+}
+
 </script>
 
 <template>
@@ -65,9 +112,20 @@ async function submit() {
 			{{ course.description }}
 		</div>
 
-		<div class="my-4" v-if="course.state === 'draft'">
+		<div class="my-4" v-if="currentUser && course.state === 'draft'">
 			<router-link :to="`/courses/${course.slug}/edit`" class="btn btn-light">Edit</router-link>
 			<a href="#" @click.prevent="submit" class="btn btn-light">Submit for Reviewing</a>
+		</div>
+
+		<div class="my-4" v-if="currentAdmin">
+			<template v-if="course.state === 'reviewing'">
+				<a href="#" @click.prevent="approve" class="btn btn-light">Approve</a>
+				<a href="#" class="btn btn-light">Reject</a>
+			</template>
+
+			<template v-if="course.state === 'published'">
+				<a href="#" @click.prevent="revoke" class="btn btn-light">Revoke</a>
+			</template>
 		</div>
 	</div>
 </template>

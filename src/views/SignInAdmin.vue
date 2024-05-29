@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue"
 import { useRouter } from "vue-router";
-import { signIn } from "../components/user.js"
+import { signIn } from "../components/admin.js"
 
 const formData = ref({
 	name: null,
@@ -15,9 +15,7 @@ const router = useRouter()
 async function onSubmit() {
 	errors.value = null
 
-	const url = "http://172.18.17.2:7078/api/v1/sign_in"
-
-	console.log(JSON.stringify(formData.value))
+	const url = "http://172.18.17.2:7078/api/v1/admin/sign_in"
 
 	const res = await fetch(url, {
 		method: "POST",
@@ -29,6 +27,8 @@ async function onSubmit() {
 	})
 
 	const body = await res.json()
+	console.log(body)
+
 	if (res.ok) {
 		const { user, token } = body
 		signIn({ ...user, token })
@@ -41,7 +41,7 @@ async function onSubmit() {
 </script>
 
 <template>
-	<h2>Sign In</h2>
+	<h2>Admin Sign In</h2>
 
 	<form @submit.prevent="onSubmit">
 		<div class="mb-3">

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue"
 import { useRouter } from "vue-router";
-import { regUser } from "../components/user.js"
+import { signIn } from "../components/user.js"
 
 const formData = ref({
 	name: null,
@@ -32,7 +32,7 @@ async function onSubmit() {
 	const body = await res.json()
 	if (res.ok) {
 		const { user, token } = body
-		regUser({ ...user, token })
+		signIn({ ...user, token })
 
 		router.push("/dashboard")
 	} else {

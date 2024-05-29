@@ -1,33 +1,37 @@
 <script setup>
+import { useRouter } from 'vue-router';
+import { currentUser } from '@/components/user';
+import { currentAdmin, signOut } from '@/components/admin';
 
-import CourseList from './CourseList.vue'
-import RoomList from './RoomList.vue'
+import Rooms from './Rooms.vue'
+import CoursesAdmin from './CoursesAdmin.vue'
 
 import CoursesMine from './CoursesMine.vue'
+
+const router = useRouter()
+function logout() {
+	signOut()
+	router.push("/")
+}
 
 </script>
 
 
 <template>
-	<h2>Dashboard: user1</h2>
+	<template v-if="currentUser">
+		<h2>Dashboard: {{ currentUser.name }}</h2>
 
-	<CoursesMine></CoursesMine>
+		<CoursesMine></CoursesMine>
 
-	<br>
-	<hr>
-	<br>
+		<br>
+		<br>
+	</template>
 
-	<h2>Dashboard: admin1</h2>
+	<template v-if="currentAdmin">
+		<div>Dashboard: {{ currentAdmin.name }} - <a href="#" @click.prevent="logout">Sign Out</a></div>
 
-	<h3>
-		Rooms
-	</h3>
+		<Rooms></Rooms>
 
-	<RoomList></RoomList>
-
-	<h3>
-		Courses for review
-	</h3>
-
-	<CourseList></CourseList>
+		<router-link to="/admin/courses">Course Management</router-link>
+	</template>
 </template>

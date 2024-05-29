@@ -20,6 +20,11 @@ const router = createRouter({
       component: () => import("../views/SignIn.vue"),
     },
     {
+      path: "/admin/sign_in",
+      name: "admin_sign_in",
+      component: () => import("../views/SignInAdmin.vue"),
+    },
+    {
       path: "/about",
       name: "about",
       component: () => import("../views/AboutView.vue"),
@@ -59,6 +64,11 @@ const router = createRouter({
       path: "/admin/rooms/:id",
       name: "rooms",
       component: () => import("../views/RoomDetail.vue"),
+    },
+    {
+      path: "/admin/courses",
+      name: "admin_rooms",
+      component: () => import("../views/CoursesAdmin.vue"),
     },
   ],
 });
