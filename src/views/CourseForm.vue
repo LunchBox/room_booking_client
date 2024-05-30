@@ -157,6 +157,9 @@ const bookingTimeSlots = computed(() => {
 						<a v-for="r in rooms" class="nav-link" :class="{ active: r === currentRoom }" href="#"
 							@click.prevent="currentRoom = r">{{ r.title }}</a>
 					</nav>
+					<div>
+						{{ currentRoom && currentRoom.description }}
+					</div>
 				</div>
 
 				<div class="my-4">
