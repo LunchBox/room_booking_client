@@ -5,6 +5,7 @@ import { diffDays, dayOffset, toDateStr } from '@/components/date.js'
 import Lock from '@/components/icons/Lock.vue'
 
 const ws = ['Sun', 'Mon', 'Tue', 'Wes', 'Thu', 'Fri', 'Sat']
+const ms = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 const props = defineProps(['date', 'occupied', 'bookings'])
 
@@ -59,7 +60,7 @@ function clickOn(date) {
 	<div class="cal7">
 		<div class="toolbar">
 			<a href="#" @click.prevent="prevMonth">&lt; Prev</a>
-			{{ year }} {{ month }}
+			{{ ms[month] }}, {{ year }}
 			<a href="#" @click.prevent="nextMonth">Next &gt;</a>
 		</div>
 		<div class="dates">
@@ -97,14 +98,18 @@ function clickOn(date) {
 }
 
 .cal7 .dates {
+	background: var(--bs-border-color);
+	padding: 1px;
+
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
-	border: 1px solid #ccc;
+	gap: 1px;
 	width: 100%;
 }
 
 .cal7 .cell {
-	border: 1px solid #ccc;
+	background: #fff;
+
 	text-align: center;
 
 	position: relative;
@@ -120,8 +125,6 @@ function clickOn(date) {
 	background-color: #ccc;
 	cursor: pointer;
 }
-
-.wday {}
 
 .cal7 .occupied {
 	font-size: 0.8rem;
