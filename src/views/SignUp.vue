@@ -34,7 +34,7 @@ async function onSubmit() {
 		const { user, token } = body
 		signIn({ ...user, token })
 
-		router.push("/dashboard")
+		router.push("/")
 	} else {
 		console.log(body)
 	}

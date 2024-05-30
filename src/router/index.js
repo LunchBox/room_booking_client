@@ -25,14 +25,14 @@ const router = createRouter({
       component: () => import("../views/SignInAdmin.vue"),
     },
     {
-      path: "/about",
-      name: "about",
-      component: () => import("../views/AboutView.vue"),
-    },
-    {
       path: "/courses",
       name: "courses",
       component: () => import("../views/Courses.vue"),
+    },
+    {
+      path: "/courses/mine",
+      name: "my_courses",
+      component: () => import("../views/CoursesMine.vue"),
     },
     {
       path: "/courses/new",
@@ -49,21 +49,6 @@ const router = createRouter({
       path: "/courses/:slug",
       name: "course",
       component: () => import("../views/CourseDetail.vue"),
-    },
-    {
-      path: "/dashboard",
-      name: "dashboard",
-      component: () => import("../views/Dashboard.vue"),
-    },
-    {
-      path: "/admin/rooms",
-      name: "rooms",
-      component: () => import("../views/Rooms.vue"),
-    },
-    {
-      path: "/admin/rooms/:id",
-      name: "rooms",
-      component: () => import("../views/RoomDetail.vue"),
     },
     {
       path: "/admin/courses",

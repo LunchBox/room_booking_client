@@ -1,9 +1,10 @@
 <script setup>
 import { ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { currentAdmin } from '@/components/admin';
+import { useRoute, useRouter } from 'vue-router';
+import { currentAdmin, signOut } from '@/components/admin';
 
 const route = useRoute()
+const router = useRouter()
 
 const courses = ref([])
 
@@ -25,11 +26,18 @@ async function load() {
 		courses.value = body
 	}
 }
-
 load()
+
+
+function logout() {
+	signOut()
+	router.push("/")
+}
 </script>
 
 <template>
+	<div>Dashboard: {{ currentAdmin.name }} - <a href="#" @click.prevent="logout">Sign Out</a></div>
+
 	<h3>
 		Courses Management
 	</h3>

@@ -1,6 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import { currentUser, signOut } from './user';
+import { currentAdmin } from './admin';
 
 const router = useRouter()
 function logout() {
@@ -19,8 +20,20 @@ function logout() {
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class=" nav-item">
-						<a class="nav-link active" aria-current="page" href="#">Home</a>
+					<li class="nav-item">
+						<router-link to="/courses" class="nav-link active" aria-current="page">
+							Courses
+						</router-link>
+					</li>
+					<li v-if="currentUser" class="nav-item">
+						<router-link to="/courses/mine" class="nav-link" aria-current="page">
+							My Courses
+						</router-link>
+					</li>
+					<li v-if="currentAdmin" class="nav-item">
+						<router-link to="/admin/courses" class="nav-link" aria-current="page">
+							Courses Management
+						</router-link>
 					</li>
 					<!-- <li class="nav-item">
 						<a class="nav-link" href="#">Link</a>
@@ -46,9 +59,9 @@ function logout() {
 				<ul class="nav">
 					<template v-if="currentUser">
 						<li class="nav-item">
-							<router-link to="/dashboard" class="nav-link">
+							<a href="#" class="nav-link">
 								{{ currentUser.name }}
-							</router-link>
+							</a>
 						</li>
 						<li class="nav-item">
 							<a href="" class="nav-link" @click.prevent="logout">Sign Out</a>

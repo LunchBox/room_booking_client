@@ -32,7 +32,7 @@ async function onSubmit() {
 
 	const body = await res.json()
 	if (res.ok) {
-		router.push("/dashboard")
+		router.push("/")
 	} else {
 		console.log(body)
 	}
