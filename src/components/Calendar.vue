@@ -57,7 +57,6 @@ function clickOn(date) {
 
 <template>
 	<div class="cal7">
-		{{ bookings }}
 		<div class="toolbar">
 			<a href="#" @click.prevent="prevMonth">&lt; Prev</a>
 			{{ year }} {{ month }}

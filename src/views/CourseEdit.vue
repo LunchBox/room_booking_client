@@ -97,8 +97,8 @@ watch(course, () => {
 	})
 })
 
-const startTime = ref("10:00:00")
-const endTime = ref("13:00:00")
+const startTime = ref("10:00")
+const endTime = ref("13:00")
 function handleDateClick(d) {
 	console.log(d)
 	lessons.value.push({
@@ -107,6 +107,10 @@ function handleDateClick(d) {
 		from: startTime.value,
 		to: endTime.value
 	})
+}
+
+function delLesson(le) {
+	lessons.value.splice(lessons.value.indexOf(le), 1)
 }
 
 const bookingTimeSlots = computed(() => {
@@ -168,8 +172,14 @@ const bookingTimeSlots = computed(() => {
 
 					<Calendar :date="date" :occupied="occupiedTimeSlots" :bookings="bookingTimeSlots"
 						@click-date="handleDateClick"></Calendar>
+
+					<ul>
+						<li v-for="le in lessons">
+							{{ le }}
+							<a href="#" @click.prevent="delLesson(le)">Del</a>
+						</li>
+					</ul>
 				</div>
-				{{ lessons }}
 			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
