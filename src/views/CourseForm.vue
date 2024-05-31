@@ -170,8 +170,8 @@ const bookingTimeSlots = computed(() => {
 								<input type="date" v-model="le.date" class="form-control">
 								<input type="time" v-model="le.from" class="form-control">
 								<input type="time" v-model="le.to" class="form-control">
-								<button @click.prevent="delLesson(le)" type="button" class="btn-close"
-									aria-label="Close"></button>
+								<button @click.prevent="delLesson(le)" type="button" class="btn btn-outline-danger"
+									aria-label="Close">Del</button>
 							</div>
 						</li>
 					</ol>

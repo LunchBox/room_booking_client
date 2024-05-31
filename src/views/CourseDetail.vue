@@ -36,7 +36,7 @@ load()
 
 
 async function submit() {
-	const url = `http://172.18.17.2:7078/api/v1/courses/${course.value.id}/submit`
+	const url = `http://172.18.17.2:7078/api/v1/courses/${course.value.id}/publish`
 
 	const res = await userFetch(url, "PATCH")
 
@@ -49,7 +49,7 @@ async function submit() {
 }
 
 async function approve() {
-	const url = `http://172.18.17.2:7078/api/v1/admin/courses/${course.value.id}/publish`
+	const url = `http://172.18.17.2:7078/api/v1/admin/courses/${course.value.id}/approve`
 
 	const res = await adminFetch(url, "PATCH")
 
