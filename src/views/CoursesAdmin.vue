@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { currentAdmin, signOut } from '@/components/admin';
 
@@ -25,6 +25,7 @@ async function load() {
 	}
 }
 load()
+watch(() => route.query?.state, load)
 
 
 function logout() {
@@ -69,11 +70,10 @@ function logout() {
 				<th>End Date</th>
 				<th>Duration</th>
 				<th>State</th>
-				<th>Creator</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr v-for=" c  in  courses ">
+			<tr v-for="c in courses">
 				<td>
 					<router-link :to="`/courses/${c.slug}`">
 						{{ c.slug }}
@@ -84,7 +84,6 @@ function logout() {
 				<td>...</td>
 				<td>...</td>
 				<td>{{ c.state }}</td>
-				<td>{{ c.user_id }}</td>
 			</tr>
 		</tbody>
 	</table>

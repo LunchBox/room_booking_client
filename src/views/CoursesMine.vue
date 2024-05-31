@@ -1,7 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { currentUser } from '@/components/user';
-
 import { userFetch } from "@/api"
 
 const courses = ref([])
