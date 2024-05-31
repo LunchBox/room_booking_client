@@ -42,8 +42,8 @@ async function onSubmit() {
 </script>
 
 <template>
-	<div class="justify-content-center">
-		<h2>Sign Up</h2>
+	<fieldset>
+		<legend>Sign Up</legend>
 
 		<form @submit.prevent="onSubmit">
 			<div class="mb-3">
@@ -63,5 +63,5 @@ async function onSubmit() {
 			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
-	</div>
+	</fieldset>
 </template>

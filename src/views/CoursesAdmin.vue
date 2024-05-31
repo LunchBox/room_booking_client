@@ -1,7 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { currentAdmin, signOut } from '@/components/admin';
 
 import { adminFetch } from "@/api"
 
@@ -27,16 +26,9 @@ async function load() {
 load()
 watch(() => route.query?.state, load)
 
-
-function logout() {
-	signOut()
-	router.push("/")
-}
 </script>
 
 <template>
-	<div>Dashboard: {{ currentAdmin.name }} - <a href="#" @click.prevent="logout">Sign Out</a></div>
-
 	<h3>
 		Courses Management
 	</h3>

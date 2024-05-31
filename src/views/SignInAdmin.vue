@@ -41,17 +41,20 @@ async function onSubmit() {
 </script>
 
 <template>
-	<h2>Admin Sign In</h2>
+	<fieldset>
+		<legend>Admin Sign In</legend>
 
-	<form @submit.prevent="onSubmit">
-		<div class="mb-3">
-			<label for="name" class="form-label">Name</label>
-			<input v-model="formData.name" type="text" required class="form-control" id="name" aria-describedby="nameHelp">
-		</div>
-		<div class="mb-3">
-			<label for="password" class="form-label">Password</label>
-			<input v-model="formData.password" type="password" required class="form-control" id="password">
-		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
-	</form>
+		<form @submit.prevent="onSubmit">
+			<div class="mb-3">
+				<label for="name" class="form-label">Name</label>
+				<input v-model="formData.name" type="text" required class="form-control" id="name"
+					aria-describedby="nameHelp">
+			</div>
+			<div class="mb-3">
+				<label for="password" class="form-label">Password</label>
+				<input v-model="formData.password" type="password" required class="form-control" id="password">
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</fieldset>
 </template>

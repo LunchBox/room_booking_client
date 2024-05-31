@@ -1,4 +1,5 @@
 import { ref } from "vue";
+import { signOut as signOutAdmin } from "./admin";
 
 const currentUser = ref(null);
 
@@ -7,6 +8,7 @@ if (localStorage.getItem("user")) {
 }
 
 function signIn(user) {
+  signOutAdmin();
   localStorage.setItem("user", JSON.stringify(user));
   currentUser.value = user;
 }

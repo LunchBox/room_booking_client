@@ -1,11 +1,12 @@
 <script setup>
 import { useRouter } from 'vue-router';
-import { currentUser, signOut } from './user';
-import { currentAdmin } from './admin';
+import { currentUser, signOut as signOutUser } from './user';
+import { currentAdmin, signOut as signOutAdmin } from './admin';
 
 const router = useRouter()
 function logout() {
-	signOut()
+	signOutUser()
+	signOutAdmin()
 	router.push("/")
 }
 </script>
@@ -35,32 +36,22 @@ function logout() {
 							Courses Management
 						</router-link>
 					</li>
-					<!-- <li class="nav-item">
-						<a class="nav-link" href="#">Link</a>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-							aria-expanded="false">
-							Dropdown
-						</a>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">Action</a></li>
-							<li><a class="dropdown-item" href="#">Another action</a></li>
-							<li>
-								<hr class="dropdown-divider">
-							</li>
-							<li><a class="dropdown-item" href="#">Something else here</a></li>
-						</ul>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link disabled" aria-disabled="true">Disabled</a>
-					</li> -->
 				</ul>
 				<ul class="nav">
 					<template v-if="currentUser">
 						<li class="nav-item">
 							<a href="#" class="nav-link">
 								{{ currentUser.name }}
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="" class="nav-link" @click.prevent="logout">Sign Out</a>
+						</li>
+					</template>
+					<template v-else-if="currentAdmin">
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								{{ currentAdmin.name }}
 							</a>
 						</li>
 						<li class="nav-item">
