@@ -3,6 +3,8 @@ import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { currentAdmin, signOut } from '@/components/admin';
 
+import { adminFetch } from "@/api"
+
 const route = useRoute()
 const router = useRouter()
 
@@ -15,11 +17,7 @@ async function load() {
 		url += `?state=${route.query.state}`
 	}
 
-	const res = await fetch(url, {
-		headers: {
-			"Authorization": `Bearer ${currentAdmin.value.token}`
-		}
-	})
+	const res = await adminFetch(url)
 
 	const body = await res.json()
 	if (res.ok) {

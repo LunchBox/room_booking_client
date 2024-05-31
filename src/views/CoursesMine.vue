@@ -2,16 +2,14 @@
 import { ref } from 'vue';
 import { currentUser } from '@/components/user';
 
+import { userFetch } from "@/api"
+
 const courses = ref([])
 
 async function load() {
 	const url = "http://172.18.17.2:7078/api/v1/courses/mine"
 
-	const res = await fetch(url, {
-		headers: {
-			"Authorization": `Bearer ${currentUser.value.token}`
-		}
-	})
+	const res = await userFetch(url)
 
 	const body = await res.json()
 	if (res.ok) {

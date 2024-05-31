@@ -7,6 +7,8 @@ import { toDateStr } from '@/components/date.js'
 
 import Calendar from '@/components/Calendar.vue';
 
+import { userFetch } from "@/api"
+
 const props = defineProps(['course'])
 const emit = defineEmits(['save-success'])
 
@@ -41,11 +43,7 @@ const occupiedTimeSlots = computed(() => {
 async function loadRooms() {
 	const url = `http://172.18.17.2:7078/api/v1/rooms`
 
-	const res = await fetch(url, {
-		headers: {
-			"Authorization": `Bearer ${currentUser.value.token}`
-		}
-	})
+	const res = await userFetch(url)
 
 	const body = await res.json()
 	if (res.ok) {
@@ -63,17 +61,11 @@ async function onSubmit() {
 		method = 'PUT'
 	}
 
-	const res = await fetch(url, {
-		method,
-		headers: {
-			"Content-Type": "application/json",
-			// 'Content-Type': 'application/x-www-form-urlencoded',
-			"Authorization": `Bearer ${currentUser.value.token}`
-		},
-		body: JSON.stringify({
-			course: { ...course.value, lessons_attributes: lessons.value }
-		})
+	const data = JSON.stringify({
+		course: { ...course.value, lessons_attributes: lessons.value }
 	})
+
+	const res = await userFetch(url, method, data)
 
 	const body = await res.json()
 	if (res.ok) {
@@ -178,7 +170,8 @@ const bookingTimeSlots = computed(() => {
 								<input type="date" v-model="le.date" class="form-control">
 								<input type="time" v-model="le.from" class="form-control">
 								<input type="time" v-model="le.to" class="form-control">
-								<button @click.prevent="delLesson(le)" class="btn btn-danger">Del</button>
+								<button @click.prevent="delLesson(le)" type="button" class="btn-close"
+									aria-label="Close"></button>
 							</div>
 						</li>
 					</ol>

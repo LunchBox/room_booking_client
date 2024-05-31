@@ -4,6 +4,8 @@ import { useRoute } from 'vue-router';
 import { currentUser } from '@/components/user';
 import { currentAdmin } from '@/components/admin';
 
+import { userFetch, adminFetch } from "@/api"
+
 const route = useRoute()
 
 const loading = ref(true)
@@ -13,16 +15,14 @@ async function load() {
 	loading.value = true
 	const url = `http://172.18.17.2:7078/api/v1/courses/${route.params.slug}`
 
-	const headers = {}
-	if (currentUser.value) {
-		headers["Authorization"] = `Bearer ${currentUser.value.token}`
-	} else if (currentAdmin.value) {
-		headers["Authorization"] = `Bearer ${currentAdmin.value.token}`
-	}
+	let act = fetch
 
-	const res = await fetch(url, {
-		headers
-	})
+	if (currentUser.value) {
+		act = userFetch
+	} else if (currentAdmin.value) {
+		act = adminFetch
+	}
+	const res = await act(url)
 
 	const body = await res.json()
 	if (res.ok) {
@@ -38,14 +38,7 @@ load()
 async function submit() {
 	const url = `http://172.18.17.2:7078/api/v1/courses/${course.value.id}/submit`
 
-	const res = await fetch(url, {
-		method: "PATCH",
-		headers: {
-			"Content-Type": "application/json",
-			// 'Content-Type': 'application/x-www-form-urlencoded',
-			"Authorization": `Bearer ${currentUser.value.token}`
-		}
-	})
+	const res = await userFetch(url, "PATCH")
 
 	const body = await res.json()
 	if (res.ok) {
@@ -58,14 +51,7 @@ async function submit() {
 async function approve() {
 	const url = `http://172.18.17.2:7078/api/v1/admin/courses/${course.value.id}/publish`
 
-	const res = await fetch(url, {
-		method: "PATCH",
-		headers: {
-			"Content-Type": "application/json",
-			// 'Content-Type': 'application/x-www-form-urlencoded',
-			"Authorization": `Bearer ${currentAdmin.value.token}`
-		}
-	})
+	const res = await adminFetch(url, "PATCH")
 
 	const body = await res.json()
 	if (res.ok) {
@@ -78,14 +64,7 @@ async function approve() {
 async function revoke() {
 	const url = `http://172.18.17.2:7078/api/v1/admin/courses/${course.value.id}/revoke`
 
-	const res = await fetch(url, {
-		method: "PATCH",
-		headers: {
-			"Content-Type": "application/json",
-			// 'Content-Type': 'application/x-www-form-urlencoded',
-			"Authorization": `Bearer ${currentAdmin.value.token}`
-		}
-	})
+	const res = await adminFetch(url, "PATCH")
 
 	const body = await res.json()
 	if (res.ok) {
