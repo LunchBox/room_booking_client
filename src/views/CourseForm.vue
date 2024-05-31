@@ -35,7 +35,7 @@ const occupiedTimeSlots = computed(() => {
 	const res = {}
 	currentRoom.value.lessons.filter(le => le.course_id !== course.value.id).forEach(le => {
 		if (!res[le.date]) res[le.date] = []
-		res[le.date].push({ ts: le.time_slot, str: le.course_name })
+		res[le.date].push({ ts: le.time_slot, str: le.course_title })
 	})
 	return res
 })
