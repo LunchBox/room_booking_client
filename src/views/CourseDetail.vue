@@ -79,14 +79,31 @@ async function revoke() {
 <template>
 	<div v-if="loading">loading...</div>
 	<div v-else>
-		<div>
-			state: {{ course.state }}
-		</div>
+
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<router-link to="/courses/mine" class="nav-link" aria-current="page" v-if="currentUser">
+						My Courses
+					</router-link>
+					<router-link to="/admin/courses" class="nav-link" aria-current="page" v-else-if="currentAdmin">
+						Courses Management
+					</router-link>
+					<router-link to="/courses" class="nav-link active" aria-current="page" v-else>
+						Courses
+					</router-link>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">
+					{{ course.slug }}
+					<span class="badge text-bg-light"></span>
+				</li>
+			</ol>
+		</nav>
+
 
 		<h2>
-			Course: {{ course.slug }} {{ course.title }}
+			{{ course.title }}
 		</h2>
-
 
 		<div class="my-4" v-if="currentUser && course.state === 'draft'">
 			<router-link :to="`/courses/${course.slug}/edit`" class="btn btn-light">Edit</router-link>
@@ -104,9 +121,11 @@ async function revoke() {
 			</template>
 		</div>
 
-		<div>
+		<div class="my-4">
 			{{ course.description }}
 		</div>
+
+		<h3>Lessons</h3>
 
 		<div>
 			<ul>
