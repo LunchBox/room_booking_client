@@ -1,13 +1,11 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
 
-import { currentUser } from '@/components/user';
-
 import { toDateStr } from '@/components/date.js'
 
 import Calendar from '@/components/Calendar.vue';
 
-import { userFetch } from "@/api"
+import { userFetch, BASE_URL } from "@/api"
 
 const props = defineProps(['course'])
 const emit = defineEmits(['save-success'])
@@ -41,7 +39,7 @@ const occupiedTimeSlots = computed(() => {
 })
 
 async function loadRooms() {
-	const url = `http://172.18.17.2:7078/api/v1/rooms`
+	const url = `${BASE_URL}/rooms`
 
 	const res = await userFetch(url)
 
@@ -54,7 +52,7 @@ loadRooms()
 
 
 async function onSubmit() {
-	let url = `http://172.18.17.2:7078/api/v1/courses`
+	let url = `${BASE_URL}/courses`
 	let method = 'POST'
 	if (course.value.id) {
 		url += `/${course.value.id}`

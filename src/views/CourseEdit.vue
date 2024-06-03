@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { currentUser } from '@/components/user';
-import { userFetch } from "@/api"
+import { userFetch, BASE_URL } from "@/api"
 
 import CourseForm from "./CourseForm.vue";
 
@@ -15,7 +15,7 @@ const course = ref(null)
 async function load() {
 	loading.value = true
 
-	const url = `http://172.18.17.2:7078/api/v1/courses/${route.params.slug}`
+	const url = `${BASE_URL}/courses/${route.params.slug}`
 
 	const res = await userFetch(url)
 

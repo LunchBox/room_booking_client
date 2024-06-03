@@ -27,4 +27,6 @@ async function adminFetch(url, method = "GET", data = null) {
   return res;
 }
 
-export { userFetch, adminFetch };
+const BASE_URL = "http://localhost:7078/api/v1";
+
+export { userFetch, adminFetch, BASE_URL };

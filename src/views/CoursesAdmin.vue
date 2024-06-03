@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-import { adminFetch } from "@/api"
+import { adminFetch, BASE_URL } from "@/api"
 
 const route = useRoute()
 const router = useRouter()
@@ -10,7 +10,7 @@ const router = useRouter()
 const courses = ref([])
 
 async function load() {
-	let url = "http://172.18.17.2:7078/api/v1/admin/courses"
+	let url = `${BASE_URL}/admin/courses`
 
 	if (route.query.state) {
 		url += `?state=${route.query.state}`

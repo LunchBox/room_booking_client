@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from "vue"
 import { useRouter } from "vue-router";
-import { signIn } from "../components/admin.js"
+import { signIn } from "@/components/admin.js"
+import { BASE_URL } from "@/api";
 
 const formData = ref({
 	name: null,
@@ -15,7 +16,7 @@ const router = useRouter()
 async function onSubmit() {
 	errors.value = null
 
-	const url = "http://172.18.17.2:7078/api/v1/admin/sign_in"
+	const url = `${BASE_URL}/admin/sign_in`
 
 	const res = await fetch(url, {
 		method: "POST",

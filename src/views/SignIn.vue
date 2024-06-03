@@ -2,6 +2,7 @@
 import { ref } from "vue"
 import { useRouter } from "vue-router";
 import { signIn } from "../components/user.js"
+import { BASE_URL } from "@/api";
 
 const formData = ref({
 	name: null,
@@ -15,7 +16,7 @@ const router = useRouter()
 async function onSubmit() {
 	errors.value = null
 
-	const url = "http://172.18.17.2:7078/api/v1/sign_in"
+	const url = `${BASE_URL}/sign_in`
 
 	console.log(JSON.stringify(formData.value))
 

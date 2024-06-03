@@ -1,10 +1,11 @@
 <script setup>
 import { ref } from 'vue';
+import { BASE_URL } from '@/api';
 
 const courses = ref([])
 
 async function load() {
-	const url = "http://172.18.17.2:7078/api/v1/courses"
+	const url = `${BASE_URL}/courses`
 
 	const res = await fetch(url)
 

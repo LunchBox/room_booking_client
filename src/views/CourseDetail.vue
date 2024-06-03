@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router';
 import { currentUser } from '@/components/user';
 import { currentAdmin } from '@/components/admin';
 
-import { userFetch, adminFetch } from "@/api"
+import { userFetch, adminFetch, BASE_URL } from "@/api"
 
 const route = useRoute()
 
@@ -13,7 +13,7 @@ const course = ref(null)
 
 async function load() {
 	loading.value = true
-	const url = `http://172.18.17.2:7078/api/v1/courses/${route.params.slug}`
+	const url = `${BASE_URL}/courses/${route.params.slug}`
 
 	let act = fetch
 
@@ -36,7 +36,7 @@ load()
 
 
 async function submit() {
-	const url = `http://172.18.17.2:7078/api/v1/courses/${course.value.id}/publish`
+	const url = `${BASE_URL}/courses/${course.value.id}/publish`
 
 	const res = await userFetch(url, "PATCH")
 
@@ -49,7 +49,7 @@ async function submit() {
 }
 
 async function approve() {
-	const url = `http://172.18.17.2:7078/api/v1/admin/courses/${course.value.id}/approve`
+	const url = `${BASE_URL}/admin/courses/${course.value.id}/approve`
 
 	const res = await adminFetch(url, "PATCH")
 
@@ -62,7 +62,7 @@ async function approve() {
 }
 
 async function revoke() {
-	const url = `http://172.18.17.2:7078/api/v1/admin/courses/${course.value.id}/revoke`
+	const url = `${BASE_URL}/admin/courses/${course.value.id}/revoke`
 
 	const res = await adminFetch(url, "PATCH")
 
