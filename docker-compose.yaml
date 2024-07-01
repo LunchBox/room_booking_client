@@ -1,0 +1,8 @@
+services:
+  app:
+    image: httpd:latest
+    ports:
+      - '7788:80'
+    volumes:
+      - './httpd.conf:/usr/local/apache2/conf/httpd.conf'
+      - './dist:/usr/local/apache2/htdocs/vue-20240701'
